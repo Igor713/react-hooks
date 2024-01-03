@@ -15,14 +15,13 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
-  parser: '@babel/eslint-parser',
+  // parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 'latest',
+    ecmaVersion: 2021, // 'latest' is not a valid option, use the specific version instead
     sourceType: 'module',
-    requireConfigFile: false,
   },
   plugins: ['react', 'prettier', 'react-hooks'],
   settings: {
@@ -34,4 +33,4 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'no-unused-vars': 'off',
   },
-}
+};

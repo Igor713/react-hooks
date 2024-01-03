@@ -1,38 +1,27 @@
-import logo from './logo.svg'
+// import logo from './logo.svg'
+import P from 'prop-types'
 import './App.css'
-import { useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
-const eventFn = () => {
-  console.log('H1 clicado')
+const Button = React.memo(function Button({ incrementButton }) {
+  return <button onClick={() => incrementButton(10)}>+</button>
+})
+
+Button.propTypes = {
+  incrementButton: P.func,
 }
 
 function App() {
   const [counter, setCounter] = useState(0)
-  const [counter2, setCounter2] = useState(0)
 
-  // componentDidUpdate - Executa toda vez que o componente atualiza
-  useEffect(() => {
-    console.log('componentDidUpdate')
-  })
-
-  // componentDidMount - Executa apenas uma vez
-  useEffect(() => {
-    document.querySelector('h1').addEventListener('click', eventFn)
-
-    //componentWillAmount - Limpeza
-    return () => {
-      document.querySelector('h1').removeEventListener('click', eventFn)
-    }
+  const incrementCounter = useCallback((num) => {
+    setCounter((c) => c + num)
   }, [])
-
-  useEffect(() => {
-    console.log('C1: ', counter, 'C2: ', counter2)
-  }, [counter, counter2])
 
   return (
     <div className="App">
       <h1>Contador: {counter}</h1>
-      <button onClick={() => setCounter(counter + 1)}>+</button>
+      <Button incrementButton={incrementCounter}></Button>
     </div>
   )
 }
